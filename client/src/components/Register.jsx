@@ -183,7 +183,7 @@ function Register() {
 
         <div className="flex items-center justify-center">
           <button
-            className="hover:bg-green-700 shadow-md rounded-full px-6 py-3 font-semibold text-white bg-primary"
+            className="hover:bg-green-700 shadow-md rounded-full px-6 py-3 font-semibold text-white bg-button"
             type="submit"
           >
             Register

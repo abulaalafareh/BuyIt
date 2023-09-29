@@ -3,7 +3,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import { ToggleFormContext } from "../contextApi/ToggleFormContext";
 import { useContext } from "react";
-import background from "../assets/bg3.jpg";
+import background from "../assets/bg4.png";
 
 function Login_register() {
   const { loginForm } = useContext(ToggleFormContext);
@@ -17,7 +17,6 @@ function Login_register() {
   const backgroundStyle = {
     backgroundImage: `url(${background})`,
     backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
   };
 

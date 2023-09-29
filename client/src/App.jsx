@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login_register from "./pages/Login_register";
+import { Header } from "./components";
 import { ToggleFormProvider } from "./contextApi/ToggleFormContext";
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <ToggleFormProvider>
         <Routes>
           <Route path="/" element={<Login_register />} />
