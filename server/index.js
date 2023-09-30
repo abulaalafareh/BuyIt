@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-// app.use("/auth", require("./routes/auth"));
+app.use("/auth", require("./routes/usersAuth"));
 
 app.listen(port, () => {
   console.log(`BuyIt listening on port http://localhost:${port}`);
