@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import { ToggleFormContext } from "../contextApi/ToggleFormContext";
@@ -7,11 +6,6 @@ import background from "../assets/bg4.png";
 
 function Login_register() {
   const { loginForm } = useContext(ToggleFormContext);
-  const [login, setLogin] = useState(false);
-  const toggleLogin = (e) => {
-    e.preventDefault();
-    setLogin(!login);
-  };
 
   // Define the inline CSS for the background image
   const backgroundStyle = {
