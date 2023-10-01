@@ -20,6 +20,7 @@ router.post("/register", async (req, res) => {
 
     user = await User.create({
       email: req.body.email,
+      name: req.body.name,
       password: securePassword,
       street: req.body.street,
       city: req.body.city,
@@ -36,6 +37,41 @@ router.post("/register", async (req, res) => {
   } catch (error) {
     res.json(error.message);
     console.log(error.message);
+  }
+});
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      res.status(400).json({ error: "This email does not exist." });
+    }
+
+    const comparePassword = await bcrypt.compare(password, user.password);
+
+    if (!comparePassword) {
+      res.status(400).json({ error: "Incorrect credentials." });
+    }
+
+    const data = {
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        street: user.street,
+        city: user.city,
+        postal_code: user.postal_code,
+      },
+    };
+    const authentication = jwt.sign(data, JWT_SECRET);
+
+    res.json({ data, authentication, msg: "login successfull" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Internal server error." });
   }
 });
 

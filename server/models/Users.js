@@ -11,6 +11,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
+
   street: {
     type: String,
     required: true,
