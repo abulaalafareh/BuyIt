@@ -3,10 +3,13 @@ import { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../Redux/UserActions";
 
 function Login() {
   const { updateToggleForm } = useContext(ToggleFormContext);
-
+  const userState = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
   const formData = {
     email: "",
     password: "",
@@ -29,6 +32,26 @@ function Login() {
             values
           );
           console.log(response);
+
+          let { id, username, email, street, city, postal } = userState.user;
+
+          email = response.data.data.user.email;
+          id = response.data.data.user.id;
+          username = response.data.data.user.name;
+          street = response.data.data.user.street;
+          city = response.data.data.user.city;
+          postal = response.data.data.user.postal_code;
+
+          dispatch(
+            setUser({
+              id,
+              email,
+              username,
+              street,
+              city,
+              postal,
+            })
+          );
         } catch (error) {
           console.error(error.response.data);
         }

@@ -9,7 +9,7 @@ function Register() {
 
   const formData = {
     email: "",
-    name: "",
+    username: "",
     password: "",
     confirm: "",
     street: "",
