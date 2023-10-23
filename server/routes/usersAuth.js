@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/Users");
+// const fetchUser = require("../middleware/fetchUser");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
-const JWT_SECRET = "abc1234$$";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post("/register", async (req, res) => {
   try {
@@ -42,18 +43,18 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-
+  console.log(email, password);
   try {
     let user = await User.findOne({ email });
 
     if (!user) {
-      res.status(400).json({ error: "This email does not exist." });
+      return res.status(400).json({ error: "This email does not exist." });
     }
 
     const comparePassword = await bcrypt.compare(password, user.password);
 
     if (!comparePassword) {
-      res.status(400).json({ error: "Incorrect credentials." });
+      return res.status(400).json({ error: "Incorrect credentials." });
     }
 
     const data = {
@@ -71,7 +72,7 @@ router.post("/login", async (req, res) => {
     res.json({ data, authentication, msg: "login successfull" });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ error: "Internal server error." });
+    return res.status(500).send({ error: "Internal server error." });
   }
 });
 

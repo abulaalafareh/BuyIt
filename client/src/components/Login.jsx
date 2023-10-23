@@ -2,9 +2,11 @@ import { ToggleFormContext } from "../contextApi/ToggleFormContext";
 import { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 function Login() {
   const { updateToggleForm } = useContext(ToggleFormContext);
+
   const formData = {
     email: "",
     password: "",
@@ -12,16 +14,24 @@ function Login() {
 
   const loginSchema = Yup.object({
     email: Yup.string().email().required("Please enter your email"),
-    password: Yup.string().min(6).required("Please enter your password"),
+    password: Yup.string().min(5).required("Please enter your password"),
   });
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: formData,
       validationSchema: loginSchema,
-      onSubmit: (values) => {
+      onSubmit: async (values) => {
         // api calls and stuff here
-        console.log(values);
+        try {
+          const response = await axios.post(
+            "http://localhost:5000/auth/login",
+            values
+          );
+          console.log(response);
+        } catch (error) {
+          console.error(error.response.data);
+        }
       },
     });
   return (
