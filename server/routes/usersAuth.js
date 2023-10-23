@@ -8,6 +8,7 @@ var jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post("/register", async (req, res) => {
+  console.log(req.body);
   try {
     let user = await User.findOne({ email: req.body.email });
 
@@ -25,7 +26,7 @@ router.post("/register", async (req, res) => {
       password: securePassword,
       street: req.body.street,
       city: req.body.city,
-      postal_code: req.body.postal_code,
+      postal_code: req.body.postal,
     });
 
     const data = {

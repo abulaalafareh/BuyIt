@@ -2,12 +2,14 @@ import { ToggleFormContext } from "../contextApi/ToggleFormContext";
 import { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 function Register() {
   const { updateToggleForm } = useContext(ToggleFormContext);
 
   const formData = {
     email: "",
+    name: "",
     password: "",
     confirm: "",
     street: "",
@@ -17,7 +19,7 @@ function Register() {
 
   const registerSchema = Yup.object({
     email: Yup.string().email().required("Please enter your email."),
-    password: Yup.string().min(6).required("Please enter your password."),
+    password: Yup.string().min(5).required("Please enter your password."),
     confirm: Yup.string()
       .required()
       .oneOf([Yup.ref("password"), null], "Password must match."),
@@ -32,9 +34,16 @@ function Register() {
     useFormik({
       initialValues: formData,
       validationSchema: registerSchema,
-      onSubmit: (values) => {
-        // api calls and stuff here
-        console.log(values);
+      onSubmit: async (values) => {
+        try {
+          const response = await axios.post(
+            "http://localhost:5000/auth/register",
+            values
+          );
+          console.log(response);
+        } catch (error) {
+          console.error(error.response.data);
+        }
       },
     });
 
@@ -64,6 +73,27 @@ function Register() {
           />
           {errors.email && touched.email ? (
             <p className="text-red-500 form-error">{errors.email}</p>
+          ) : null}
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-semibold mb-2"
+            htmlFor="name"
+          >
+            Name
+          </label>
+          <input
+            className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="name"
+            name="name"
+            type="text"
+            placeholder="John"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.name}
+          />
+          {errors.name && touched.name ? (
+            <p className="text-red-500 form-error">{errors.name}</p>
           ) : null}
         </div>
         <div className="grid grid-cols-2 gap-4">
