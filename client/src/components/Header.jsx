@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function Header() {
   return (
     <nav className="flex-no-wrap relative flex w-full items-center justify-between bg-background py-2 shadow-sm shadow-black lg:flex-wrap lg:justify-start lg:py-4">
@@ -27,7 +28,7 @@ function Header() {
           <li className="mb-4 lg:mb-0 lg:pr-2 px-2">
             <a
               className="text-black transition duration-200 hover:text-neutral-500 "
-              href="#"
+              href="/"
             >
               Products
             </a>
@@ -35,18 +36,20 @@ function Header() {
           <li className="mb-4 lg:mb-0 lg:pr-2 ml-3 mr-3">
             <a
               className="text-black transition duration-200 hover:text-neutral-500 "
-              href="#"
+              href="/cart"
             >
               Cart
             </a>
           </li>
         </ul>
-        <button
-          className="hover:bg-green-700 shadow-md rounded-full px-6 py-3 font-semibold text-white bg-button"
-          type="click"
-        >
-          Login
-        </button>
+        <Link className="nav-link active" to="/login">
+          <button
+            className="hover:bg-green-700 shadow-md rounded-full px-6 py-3 font-semibold text-white bg-button"
+            type="click"
+          >
+            Login
+          </button>
+        </Link>
       </div>
     </nav>
   );
