@@ -1,15 +1,19 @@
 import { ToggleFormContext } from "../contextApi/ToggleFormContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../Redux/UserActions";
+import { useEffect } from "react";
 
 function Login() {
   const { updateToggleForm } = useContext(ToggleFormContext);
   const userState = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+  const [userData, setUserData] = useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
   const formData = {
     email: "",
     password: "",
@@ -19,6 +23,10 @@ function Login() {
     email: Yup.string().email().required("Please enter your email"),
     password: Yup.string().min(5).required("Please enter your password"),
   });
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(userData));
+  }, [userData]);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -52,6 +60,8 @@ function Login() {
               postal,
             })
           );
+
+          setUserData({ id, email, username, street, city, postal });
         } catch (error) {
           console.error(error.response.data);
         }
