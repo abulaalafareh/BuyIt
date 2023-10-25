@@ -2,13 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Login_register } from "./pages";
 import { Products } from "./pages";
 import { Cart } from "./pages";
-import { Header, Sidebar } from "./components";
+import { Header } from "./components";
 import { ToggleFormProvider } from "./contextApi/ToggleFormContext";
 function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Sidebar />
       <ToggleFormProvider>
         <Routes>
           <Route path="/" element={<Products />} />
