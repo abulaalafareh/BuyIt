@@ -11,7 +11,7 @@ function App() {
       <ToggleFormProvider>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/landing" element={<Products />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login_register />} />
         </Routes>

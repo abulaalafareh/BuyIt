@@ -12,7 +12,7 @@ function Header() {
           {/* Logo */}
           <a
             className="mb-4 ml-2 mr-5 mt-3 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0"
-            href="#"
+            href="/"
           >
             <img
               src="https://tecdn.b-cdn.net/img/logo/te-transparent-noshadows.webp"
@@ -28,7 +28,7 @@ function Header() {
           <li className="mb-4 lg:mb-0 lg:pr-2 px-2">
             <a
               className="text-black transition duration-200 hover:text-neutral-500 "
-              href="/"
+              href="/products"
             >
               Products
             </a>

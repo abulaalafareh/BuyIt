@@ -16,11 +16,12 @@ function Hero() {
           Want to shop your <span className="text-red-600">HEART</span> out?
         </h6>
         <h6 className="mt-10 text-3xl text-white ">
-          Welcome to the right place
+          Welcome to the <span className="text-green-500 font-bold">Right</span>{" "}
+          place
         </h6>
         <Link className="nav-link active" to="/products">
           <button
-            className=" mt-20 hover:border-2 hover:font-bold shadow-lg border  rounded-full px-6 py-3 font-semibold text-white "
+            className=" mt-20 hover:border-2 hover:font-bold shadow-inner shadow-white  border  rounded-full px-6 py-3 font-semibold text-white "
             type="click"
           >
             Products
